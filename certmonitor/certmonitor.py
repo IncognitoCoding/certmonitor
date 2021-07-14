@@ -434,7 +434,7 @@ def main():
                         )   
                         logger.error(error_message) 
             except Exception as err:
-                # Try catches are not normally inside an exception, but this exception is required because sending_email could have failures.
+                # Try catches are generally not inside an exception, but this exception is required because sending_email could have failures.
                 try:
 
                     # Checks for error specifics for notification.
@@ -474,7 +474,8 @@ def main():
                             exit()
                         # Outputs any other non-IncogitoCoding captured error.
                         else:
-                            logger.error(err) 
+                            logger.error(err)
+                            logger.error(f'Error end point on line {traceback.extract_stack()[-1].lineno} in <{__name__}>') 
                             exit()
                 except Exception as err:
                     # Checks if return errors are from IncogitoCoding returns. All IC returns will have already logged at the raised error.
@@ -484,6 +485,7 @@ def main():
                     # Outputs any other non-IncogitoCoding captured error.
                     else:
                         logger.error(err) 
+                        logger.error(f'Error end point on line {traceback.extract_stack()[-1].lineno} in <{__name__}>')
                         exit()
         # Checks if the program should continue to loop and sleep based on the "monitoring_sleep" value.
         if predefined_variables.continuous_monitoring:
