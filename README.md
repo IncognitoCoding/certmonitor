@@ -1,6 +1,8 @@
 # Overview
 CertMonitor is a certificate expiration monitoring software. This software will help to eliminate costly outages when a certificate expires on critical applications. All configuration is setup through a simple to use YAML configuration file. The YAML file offers the ability for the program to continuously run and check on a schedule or individual runs that can be run with a different task scheduling software.
 
+The program is currently setup to monitor SSL website certificates for expiration. In the future,  non-URL certificate expiration will get added.
+
 ## Program Highlights:
 * The YAML file allows updating on the fly, and each loop will use the updated YAML configuration.
 * Customizable certificate checks based on the sleep YAML setting (hourly, daily, weekly, monthly).
