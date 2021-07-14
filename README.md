@@ -13,7 +13,7 @@ The program is currently setup to monitor SSL website certificates for expiratio
 The YAML file is broken into four main configuration sections. You will only need to edit the first three (general, site_urls, and notification_handler) for general usage. Each YAML section in the YAML file explains what each value represents. The fourth section is for logging, which is "INFO" level logging by default.
 
 # Program Prerequisites:
-Use the requirements.txt file to make sure you have all the required prerequisites. You should have "wheel" installed as well (pip install wheel). This helps cleanly get the latest version of Github libraries is the requirements.txt. This program will use an additional package called ictoolkit created by IncognitoCoding for most general function calls. Future programs will utilize the similar ictoolkit package. Feel free to use this package for your Python programming.
+Use the requirements.txt file to make sure you have all the required prerequisites. You should have "wheel" installed as well (`pip install wheel`). This helps cleanly get the latest version of Github libraries is the requirements.txt. This program will use an additional package called ictoolkit created by IncognitoCoding for most general function calls. Future programs will utilize the similar ictoolkit package. Feel free to use this package for your Python programming.
 
 ## How to Use:
 The sample YAML configuration file has plenty of notes to help explain the setup process. The steps below will explain what needs to be done to get the program running with continuous monitoring enabled. You can use similar steps when continuous monitoring is disabled, but scheduled runs will need setup.
@@ -65,5 +65,5 @@ The sample YAML configuration file has plenty of notes to help explain the setup
     Step 5: Verify the program is running as a service or scheduled task. 
 ## Troubleshooting:
 The YAML file offers logging DEBUG options to troubleshoot any issues you encounter. Please report any bugs.
-#### Future Updates:
-Offer the ability to check non-URL certificate expiration.
+## TODO / Future Updates:
+- [ ] Offer the ability to check non-URL certificate expiration.
