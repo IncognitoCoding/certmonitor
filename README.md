@@ -62,7 +62,6 @@ The sample YAML configuration file has plenty of notes to help explain the setup
             Step 4.2.5: Check the status of the new service.
                 sudo systemctl status certmonitor.service
     Step 5: Verify the program is running as a service or scheduled task. 
-    Step 6: Once verified, you should set the logging handler to option 2 and the file's log level to INFO. This will cut down on disk space.
 ## Troubleshooting:
 The YAML file offers logging DEBUG options to troubleshoot any issues you encounter. Please report any bugs.
 #### Future Updates:
