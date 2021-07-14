@@ -35,14 +35,6 @@ notification_handler:
       use_tls: False
       from_email: alerts@monitoring.me
       to_email: youremail@monitoring.me
-      # Allows the alert message to be encrypted
-      # True: enabled, False: disabled
-      send_message_encrypted: True
-      # These settings are required to send an encrypted email message
-      # Password input to be used with the random salt
-      message_encryption_password: ChangePassword1
-      # Create a random "salt" using this command "print("urandom16 Key:", os.urandom(16))"
-      message_encryption_random_salt: b'ChangeME'
 
 ###############################################################################
 ############################Python Logging Setup###############################

@@ -327,14 +327,6 @@ class Startup_Variables(object):
             password = returned_yaml_read_config.get('notification_handler').get('email').get('password')
             from_email = returned_yaml_read_config.get('notification_handler').get('email').get('from_email')
             to_email = returned_yaml_read_config.get('notification_handler').get('email').get('to_email')
-            send_message_encrypted = returned_yaml_read_config.get('notification_handler').get('email').get('send_message_encrypted')
-            message_encryption_password = returned_yaml_read_config.get('notification_handler').get('email').get('message_encryption_password')
-            # Gets the random "salt".
-            # yaml bytes entry being passed is not allowing it to be recognized as bytes.
-            # Seems the only way to fix the issue is to strip the bytes section and re-encode.
-            # Strips the bytes section off the input.
-            # Removes first 2 characters.
-            unconverted_encrypted_info = returned_yaml_read_config.get('notification_handler').get('email').get('message_encryption_random_salt')[2:]
             # Validates the YAML value.
             yaml_value_validation('smtp', smtp, str)
             yaml_value_validation('authentication_required', authentication_required, bool)
@@ -343,9 +335,6 @@ class Startup_Variables(object):
             yaml_value_validation('password', password, str)
             yaml_value_validation('from_email', from_email, str)
             yaml_value_validation('to_email', to_email, str)
-            yaml_value_validation('send_message_encrypted', send_message_encrypted, bool)
-            yaml_value_validation('message_encryption_password', message_encryption_password, str)
-            yaml_value_validation('unconverted_encrypted_info', unconverted_encrypted_info, str)
             # Adds the email_settings into a dictionary.
             # This format is required for the email function parameters.
             email_settings['smtp'] = smtp
@@ -355,14 +344,6 @@ class Startup_Variables(object):
             email_settings['password'] = password
             email_settings['from_email'] = from_email
             email_settings['to_email'] = to_email
-            email_settings['send_message_encrypted'] = send_message_encrypted
-            email_settings['message_encryption_password'] = message_encryption_password
-            
-            # Removes last character.
-            unconverted_encrypted_info = unconverted_encrypted_info[:-1]
-            # Re-encodes the salt and sets value to the email_settings dictionary.
-            # Adds the random "salt" to the email_settings into a dictionary.
-            self.message_encryption_random_salt = unconverted_encrypted_info.encode()
             # Sets email dictionary settings as an object.
             self.email_settings = email_settings
             logger.debug('Returning YAML configuration value objects')
