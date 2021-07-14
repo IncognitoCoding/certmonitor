@@ -3,7 +3,9 @@ CertMonitor is a certificate expiration monitoring software. This software will 
 
 ## Program Highlights:
 * The YAML file allows updating on the fly, and each loop will use the updated YAML configuration.
-*  Email supports standard port 25 or TLS
+* Customizable certificate checks based on the sleep YAML setting (hourly, daily, weekly, monthly).
+* Unlimited amount of SSL websites can get monitored.
+* Email supports standard port 25 or TLS
 
 ## Setup Recommendations & Setup Hints:
 The YAML file is broken into four main configuration sections. You will only need to edit the first three (general, site_urls, and notification_handler) for general usage. Each YAML section in the YAML file explains what each value represents. The fourth section is for logging, which is "INFO" level logging by default.
