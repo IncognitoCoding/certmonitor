@@ -1,0 +1,84 @@
+version: 1
+
+general:
+  # Program will continue to run when enabled and sleep based on the monitor_sleep value.
+  # True: enabled, False: disabled
+  continuous_monitoring: False
+  # Add the number of seconds to sleep between log checks. For continuous_monitoring only.
+  # Limited to 4294967 seconds (49 days, 17:02:47).
+  monitor_sleep: 2592000
+  # True or False
+  email_alerts: True
+  # Sends email alerts with program crashes.
+  # True: enabled, False: disabled
+  alert_program_errors: True
+  # Sets buffer days before certificate warnings start.
+  buffer_days: 18
+  # Sets timezome
+  # Supports: CST, UTC, EST, MST, and PST
+  time_zome: CST
+
+site_urls:
+  # Add additional URLs that need checked. All sites must support https.
+  - google.com
+  - ebay.com
+
+notification_handler:
+    email:
+      smtp: smtp.yourdomain.com
+      # True or False
+      authentication_required: False
+      username: SMTP_username
+      # Leave blank if not required
+      password: SMTP_password
+      #True: Use TLS on port 587, False: Standard port 25
+      use_tls: False
+      from_email: alerts@monitoring.me
+      to_email: youremail@monitoring.me
+      # Allows the alert message to be encrypted
+      # True: enabled, False: disabled
+      send_message_encrypted: True
+      # These settings are required to send an encrypted email message
+      # Password input to be used with the random salt
+      message_encryption_password: ChangePassword1
+      # Create a random "salt" using this command "print("urandom16 Key:", os.urandom(16))"
+      message_encryption_random_salt: b'ChangeME'
+
+###############################################################################
+############################Python Logging Setup###############################
+###############################################################################
+disable_existing_loggers: False
+formatters:
+  simple:
+    format: "%(asctime)s|%(levelname)s|%(message)s (Module:%(module)s, Function:%(funcName)s, Line:%(lineno)s)"
+    datefmt: "%Y-%m-%d %H:%M:%S"
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+    stream: ext://sys.stdout
+  certmonitor_log_file:
+    class: logging.handlers.RotatingFileHandler
+    level: DEBUG
+    formatter: simple
+    filename: certmonitor\\logs\\certmonitor.log
+    # Sets max log file size to 10000 bytes (1 Megabyte)
+    maxBytes: 2000000
+    backupCount: 20
+    encoding: utf8
+
+loggers:
+  __main__:
+    level: INFO
+    handlers: [console, certmonitor_log_file]
+    propagate: no
+  ictoolkit:
+    level: INFO
+    handlers: [console, certmonitor_log_file]
+    propagate: no
+    
+root:
+  level: INFO
+  handlers: [console]

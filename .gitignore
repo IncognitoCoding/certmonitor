@@ -1,0 +1,6 @@
+venv*/
+certmonitor.yaml
+*.log*
+.vscode/
+.vscode/settings.json
+__pycache__/
