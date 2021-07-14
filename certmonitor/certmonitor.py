@@ -434,38 +434,57 @@ def main():
                         )   
                         logger.error(error_message) 
             except Exception as err:
-                # Checks for error specifics for notification.
-                if 'Please validate that the website is an HTTPS supported website' in str(err):
-                    # Checks if program error alerts should be emailed.
-                    if predefined_variables.alert_program_errors:
-                        subject = 'Website Certificate Validation Skipped'
-                        body = f'The URL ({url}) is not reachable. This website may be offline or decommissioned. If the website is no longer available,'
-                        ' you will want to remove this URL from the configuration file to avoid these alerts from continuing.'
-                        # Calls function to send the email.
-                        # Calling Example: send_email(<Dictionary: email settings>, <Subject>, <Issue Message To Send>, <configured logger>)
-                        send_email(predefined_variables.email_settings, subject, body) 
+                # Try catches are not normally inside an exception, but this exception is required because sending_email could have failures.
+                try:
 
-                    error_message = (
-                        f'Website Certificate Validation Skipped.\n' +
-                        (('-' * 150) + '\n') + (('-' * 65) + 'Additional Information' + ('-' * 63) + '\n') + (('-' * 150) + '\n') +
-                        'Error Output:\n'
-                        f'  - The URL ({url}) is not reachable. This website may be offline or decommissioned.\n\n'
-                        'Suggested Resolution:\n'
-                        f'  - If the website is no longer available, you will want to remove this URL from the configuration file to avoid these alerts from continuing.\n\n'
-                        f'Originating error on line {traceback.extract_stack()[-1].lineno} in <{__name__}>\n' +
-                        (('-' * 150) + '\n') * 2 
-                    )   
-                    logger.error(error_message) 
-                else:
-                    # Checks if program error alerts should be emailed.
-                    if predefined_variables.alert_program_errors:
-                        subject = 'Website Certificate Validation Skipped'
-                        body = f'The URL ({url}) is being skipped because of a general error. See log for more details.'
-                        # Calls function to send the email.
-                        # Calling Example: send_email(<Dictionary: email settings>, <Subject>, <Issue Message To Send>, <configured logger>)
-                        send_email(predefined_variables.email_settings, subject, body) 
-                    logger.error(err) 
+                    # Checks for error specifics for notification.
+                    if 'Please validate that the website is an HTTPS supported website' in str(err):
+                        # Checks if program error alerts should be emailed.
+                        if predefined_variables.alert_program_errors:
+                            subject = 'Website Certificate Validation Skipped'
+                            body = f'The URL ({url}) is not reachable. This website may be offline or decommissioned. If the website is no longer available,'
+                            ' you will want to remove this URL from the configuration file to avoid these alerts from continuing.'
+                            # Calls function to send the email.
+                            # Calling Example: send_email(<Dictionary: email settings>, <Subject>, <Issue Message To Send>, <configured logger>)
+                            send_email(predefined_variables.email_settings, subject, body) 
 
+                        error_message = (
+                            f'Website Certificate Validation Skipped.\n' +
+                            (('-' * 150) + '\n') + (('-' * 65) + 'Additional Information' + ('-' * 63) + '\n') + (('-' * 150) + '\n') +
+                            'Error Output:\n'
+                            f'  - The URL ({url}) is not reachable. This website may be offline or decommissioned.\n\n'
+                            'Suggested Resolution:\n'
+                            f'  - If the website is no longer available, you will want to remove this URL from the configuration file to avoid these alerts from continuing.\n\n'
+                            f'Originating error on line {traceback.extract_stack()[-1].lineno} in <{__name__}>\n' +
+                            (('-' * 150) + '\n') * 2 
+                        )   
+                        logger.error(error_message) 
+                    else:
+                        # Checks if program error alerts should be emailed and that the program is not returning from an error from sending an email.
+                        if predefined_variables.alert_program_errors and 'Failed to send the email message' not in str(err):
+                            subject = 'Website Certificate Validation Skipped'
+                            body = f'The URL ({url}) is being skipped because of a general error. See log for more details.'
+                            # Calls function to send the email.
+                            # Calling Example: send_email(<Dictionary: email settings>, <Subject>, <Issue Message To Send>, <configured logger>)
+                            send_email(predefined_variables.email_settings, subject, body) 
+
+                        # Checks if return errors are from IncogitoCoding returns. All IC returns will have already logged at the raised error.
+                        if '-----------------Additional Information-----------------------' in str(err):
+                            logger.error(f'Error end point on line {traceback.extract_stack()[-1].lineno} in <{__name__}>')
+                            exit()
+                        # Outputs any other non-IncogitoCoding captured error.
+                        else:
+                            logger.error(err) 
+                            exit()
+                except Exception as err:
+                    # Checks if return errors are from IncogitoCoding returns. All IC returns will have already logged at the raised error.
+                    if '-----------------Additional Information-----------------------' in str(err):
+                        logger.error(f'Error end point on line {traceback.extract_stack()[-1].lineno} in <{__name__}>')
+                        exit()
+                    # Outputs any other non-IncogitoCoding captured error.
+                    else:
+                        logger.error(err) 
+                        exit()
         # Checks if the program should continue to loop and sleep based on the "monitoring_sleep" value.
         if predefined_variables.continuous_monitoring:
             # Converts seconds to full time output for clean log output.
