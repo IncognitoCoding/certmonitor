@@ -28,7 +28,7 @@ The sample YAML configuration file has plenty of notes to help explain the setup
                     - Set trigger time. Maybe daily around midnight
                     - Set action to start program
                     - Program/Script: python
-                    - Arguments: "C:\<path to the program>\software_log_monitor.py"
+                    - Arguments: "C:\<path to the program>\certmonitor.py"
        Step 4.2 (Optional - Linux Ubuntu): Set up a service to run the program.
             Step 4.2.1:  Create a new service file.
                 Run: cd /lib/systemd/system
