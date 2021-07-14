@@ -1,15 +1,19 @@
 # Overview
 CertMonitor is a certificate expiration monitoring software. This software will help to eliminate costly outages when a certificate expires on critical applications. All configuration is setup through a simple to use YAML configuration file. The YAML file offers the ability for the program to continuously run and check on a schedule or individual runs that can be run with a different task scheduling software.
 
+The program is currently setup to monitor SSL website certificates for expiration. In the future,  non-URL certificate expiration will get added.
+
 ## Program Highlights:
 * The YAML file allows updating on the fly, and each loop will use the updated YAML configuration.
-*  Email supports standard port 25 or TLS
+* Customizable certificate checks based on the sleep YAML setting (hourly, daily, weekly, monthly).
+* Unlimited amount of SSL websites can get monitored.
+* Email supports standard port 25 or TLS
 
 ## Setup Recommendations & Setup Hints:
 The YAML file is broken into four main configuration sections. You will only need to edit the first three (general, site_urls, and notification_handler) for general usage. Each YAML section in the YAML file explains what each value represents. The fourth section is for logging, which is "INFO" level logging by default.
 
 # Program Prerequisites:
-Use the requirements.txt file to make sure you have all the required prerequisites. This program will use an additional package called ictoolkit created by IncognitoCoding for most general function calls. Future programs will utilize the similar ictoolkit package. Feel free to use this package for your Python programming.
+Use the requirements.txt file to make sure you have all the required prerequisites. You should have "wheel" installed as well (pip install wheel). This helps cleanly get the latest version of Github libraries is the requirements.txt. This program will use an additional package called ictoolkit created by IncognitoCoding for most general function calls. Future programs will utilize the similar ictoolkit package. Feel free to use this package for your Python programming.
 
 ## How to Use:
 The sample YAML configuration file has plenty of notes to help explain the setup process. The steps below will explain what needs to be done to get the program running with continuous monitoring enabled. You can use similar steps when continuous monitoring is disabled, but scheduled runs will need setup.
@@ -26,7 +30,7 @@ The sample YAML configuration file has plenty of notes to help explain the setup
                     - Set trigger time. Maybe daily around midnight
                     - Set action to start program
                     - Program/Script: python
-                    - Arguments: "C:\<path to the program>\software_log_monitor.py"
+                    - Arguments: "C:\<path to the program>\certmonitor.py"
        Step 4.2 (Optional - Linux Ubuntu): Set up a service to run the program.
             Step 4.2.1:  Create a new service file.
                 Run: cd /lib/systemd/system
@@ -58,7 +62,6 @@ The sample YAML configuration file has plenty of notes to help explain the setup
             Step 4.2.5: Check the status of the new service.
                 sudo systemctl status certmonitor.service
     Step 5: Verify the program is running as a service or scheduled task. 
-    Step 6: Once verified, you should set the logging handler to option 2 and the file's log level to INFO. This will cut down on disk space.
 ## Troubleshooting:
 The YAML file offers logging DEBUG options to troubleshoot any issues you encounter. Please report any bugs.
 #### Future Updates:
