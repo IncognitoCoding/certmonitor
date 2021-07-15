@@ -16,7 +16,7 @@ __author__ = 'IncognitoCoding'
 __copyright__ = 'Copyright 2021, CertMonitor'
 __credits__ = ['IncognitoCoding']
 __license__ = 'GPL'
-__version__ = '0.1'
+__version__ = '0.2'
 __maintainer__ = 'IncognitoCoding'
 __status__ = 'Development'
 
@@ -249,12 +249,6 @@ class Startup_Variables(object):
 
             # Sets root directory.
             preset_root_directory = os.path.dirname(os.path.realpath(__file__))
-            # Sets the program log path for the default log path in the YAML.
-            log_path = os.path.abspath(f'{preset_root_directory}/logs')
-            # Checks if the save_log_path exists and if not it will be created.
-            # This is required because the logs do not save to the root directory.
-            if not os.path.exists(log_path):
-                os.makedirs(log_path)
             # Sets the YAML file configuration location.
             yaml_file_path = os.path.abspath(f'{preset_root_directory}/certmonitor.yaml')
             # Calls function to setup the logging configuration with the YAML file.
@@ -470,6 +464,8 @@ def main():
 
                         # Checks if return errors are from IncogitoCoding returns. All IC returns will have already logged at the raised error.
                         if '-----------------Additional Information-----------------------' in str(err):
+                            # Outputs raised error from original exception.
+                            logger.error(err)
                             logger.error(f'Error end point on line {traceback.extract_stack()[-1].lineno} in <{__name__}>')
                             exit()
                         # Outputs any other non-IncogitoCoding captured error.
@@ -480,6 +476,8 @@ def main():
                 except Exception as err:
                     # Checks if return errors are from IncogitoCoding returns. All IC returns will have already logged at the raised error.
                     if '-----------------Additional Information-----------------------' in str(err):
+                        # Outputs raised error from original exception.
+                        logger.error(err)
                         logger.error(f'Error end point on line {traceback.extract_stack()[-1].lineno} in <{__name__}>')
                         exit()
                     # Outputs any other non-IncogitoCoding captured error.

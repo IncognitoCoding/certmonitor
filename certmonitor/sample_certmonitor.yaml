@@ -55,7 +55,9 @@ handlers:
     class: logging.handlers.RotatingFileHandler
     level: DEBUG
     formatter: simple
-    filename: certmonitor\\logs\\certmonitor.log
+    # Default log paths are possible by typing DEFAULT in all caps. Manual paths can be entered as usual.
+    # The default path option is only available when using the log_director function from ictoolkit.
+    filename: DEFAULT
     # Sets max log file size to 10000 bytes (1 Megabyte)
     maxBytes: 2000000
     backupCount: 20
