@@ -13,7 +13,7 @@ general:
   # True: enabled, False: disabled
   alert_program_errors: True
   # Sets buffer days before certificate warnings start.
-  buffer_days: 18
+  buffer_days: 45
   # Sets timezome
   # Supports: CST, UTC, EST, MST, and PST
   time_zome: CST
