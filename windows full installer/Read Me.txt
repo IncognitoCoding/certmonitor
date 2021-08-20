@@ -1,0 +1,9 @@
+CertMonitor has been packaged into a simple-to-use Windows executable with a simple-to-use installer. This process removes any requirement for installing required dependencies or even Python on the Windows machine requiring the program. 
+
+The certmonitor.py file was converted into an exe using pyinstaller, and the installation of the certmonitor windows executable was created using Inno Setup Compiler. 
+
+To install CertMonitor, run the certmonitor.exe and follow the on-screen instructions.
+
+Note1: CertMonitor requires a certmonitor.yaml file to be configured in the program installation directory. If this file does not exist the program will throw an error. 
+
+Note2: A sample_certmonitor.yaml file has been provided for you to edit and add your settings. When installing an updated version of the software,  your certmonitor.yaml file will not get overwritten.

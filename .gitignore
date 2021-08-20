@@ -4,3 +4,7 @@ certmonitor.yaml
 .vscode/
 .vscode/settings.json
 __pycache__/
+certmonitor/build*
+certmonitor/dist*
+icon.ico
+certmonitor.spec
