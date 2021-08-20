@@ -7,12 +7,16 @@ The program is currently setup to monitor SSL website certificates for expiratio
 * The YAML file allows updating on the fly, and each loop will use the updated YAML configuration.
 * Customizable certificate checks based on the sleep YAML setting (hourly, daily, weekly, monthly).
 * Unlimited amount of SSL websites can get monitored.
-* Email supports standard port 25 or TLS
+* Email supports standard port 25 or TLS.
+* Custom Windows supported installation.
 
 ## Setup Recommendations & Setup Hints:
 The YAML file is broken into four main configuration sections. You will only need to edit the first three (general, site_urls, and notification_handler) for general usage. Each YAML section in the YAML file explains what each value represents. The fourth section is for logging, which is "INFO" level logging by default.
 
-# Program Prerequisites:
+## Windows Full Install
+CertMonitor has been packaged into a simple-to-use Windows executable with a simple-to-use installer. This process removes any requirement for installing required dependencies or even Python on the Windows machine requiring the program. You can find the windows install under the "full windows install" folder. Also, the "How to Use" section can be followed for the exe instead of using the certmonitor.py file. If you wish to run the program with your local Python, please continue reading for execution details. 
+
+## Python Execution Prerequisites:
 Use the requirements.txt file to make sure you have all the required prerequisites. You should have "wheel" installed as well (`pip install wheel`). This helps cleanly get the latest version of Github libraries is the requirements.txt. This program will use an additional package called ictoolkit created by IncognitoCoding for most general function calls. Future programs will utilize the similar ictoolkit package. Feel free to use this package for your Python programming.
 
 ## How to Use:
