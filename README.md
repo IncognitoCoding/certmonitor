@@ -16,6 +16,8 @@ The YAML file is broken into four main configuration sections. You will only nee
 ## Windows Full Install
 CertMonitor has been packaged into a simple-to-use Windows executable with a simple-to-use installer. This process removes any requirement for installing required dependencies or even Python on the Windows machine requiring the program. You can find the windows install under the "full windows install" folder. Also, the "How to Use" section can be followed for the exe instead of using the certmonitor.py file. If you wish to run the program with your local Python, please continue reading for execution details. 
 
+For the program to recognize the YAML file, you must rename the sample_certmonitor.yaml file in the program installation directory to certmonitor.yaml and add your configuration.
+
 ## Python Execution Prerequisites:
 Use the requirements.txt file to make sure you have all the required prerequisites. You should have "wheel" installed as well (`pip install wheel`). This helps cleanly get the latest version of Github libraries is the requirements.txt. This program will use an additional package called ictoolkit created by IncognitoCoding for most general function calls. Future programs will utilize the similar ictoolkit package. Feel free to use this package for your Python programming.
 
