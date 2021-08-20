@@ -20,7 +20,7 @@ __version__ = '0.3'
 __maintainer__ = 'IncognitoCoding'
 __status__ = 'Development'
 
-class SSL_Check(object):
+class SSLCheck(object):
 
     def ssl_pull(self, site_url):
         """
@@ -105,7 +105,7 @@ class SSL_Check(object):
                 raise ValueError(error_message)
 
 
-class URL_Info(object):
+class URLInfo(object):
 
     def get_url_certificate_info(self, site_url, buffer_days, time_zone):
         """.
@@ -131,7 +131,7 @@ class URL_Info(object):
             # Strips https if it exists.
             site_url = site_url.replace('https://','')
             # Calls class and makes call to pull ssl.
-            ssl_check = SSL_Check()
+            ssl_check = SSLCheck()
             ssl_output = ssl_check.ssl_pull(site_url)
         except Exception as err:
             raise ValueError(err)
@@ -235,7 +235,7 @@ class URL_Info(object):
             raise ValueError(error_message)
 
 
-class Startup_Variables(object):
+class StartupVariables(object):
 
     def populate_startup_variables(self):
         """
@@ -373,7 +373,7 @@ def main():
     while True:
         logger = logging.getLogger(__name__)
         # Initiates class.
-        startup_variables = Startup_Variables()
+        startup_variables = StartupVariables()
         # Calls function to pull in the startup variables.
         predefined_variables = startup_variables.populate_startup_variables()
 
@@ -391,7 +391,7 @@ def main():
 
             try:
                 
-                url_info = URL_Info()
+                url_info = URLInfo()
                 # Gets the certificate info status.
                 url_certificate_output = url_info.get_url_certificate_info(url, predefined_variables.buffer_days, predefined_variables.time_zome)
                 # Checks return output for specific strings to create email specific messages.
